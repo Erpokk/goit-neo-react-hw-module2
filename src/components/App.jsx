@@ -14,9 +14,9 @@ const App = () => {
       return JSON.parse(savedState);
     }
     return {
-      Good: 0,
-      Neutral: 0,
-      Bad: 0,
+      good: 0,
+      neutral: 0,
+      bad: 0,
     };
   };
   const [values, setValues] = useState(loadState);
@@ -59,7 +59,11 @@ const App = () => {
         clear={clearFeedback}
       />
       {countTotalFeedback() > 0 ? (
-        <Feedback options={values} total={countTotalFeedback} />
+        <Feedback
+          options={values}
+          total={countTotalFeedback()}
+          positive={Math.round((values.good / countTotalFeedback()) * 100)}
+        />
       ) : (
         <Notification>No feedback yet</Notification>
       )}
